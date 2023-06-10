@@ -1,3 +1,4 @@
 export enum BGC {
-  PRIMARY = "#FFFFFF",
+  PRIMARY = "#F1EFED",
+  SECONDARY = "#F2EA86",
 }

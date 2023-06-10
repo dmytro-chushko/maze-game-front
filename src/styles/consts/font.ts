@@ -6,4 +6,5 @@ export enum SIZE {
 
 export enum COLOR {
   PRIMARY = "#000000",
+  ERROR = "#DC2626",
 }

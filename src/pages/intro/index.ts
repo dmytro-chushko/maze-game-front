@@ -1,1 +1,1 @@
-export { Intro } from "./intro-component";
+export { Intro } from "./intro.component";
