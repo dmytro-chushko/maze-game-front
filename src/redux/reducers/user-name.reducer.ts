@@ -20,4 +20,4 @@ export const userName = createSlice({
 });
 
 export const { setUserName, unsetUserName } = userName.actions;
-export const getToken = (state: RootState) => state.user.name;
+export const getUserName = (state: RootState) => state.user.name;
