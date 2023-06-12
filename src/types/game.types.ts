@@ -10,6 +10,7 @@ export interface IGame {
 	maze: string;
 	p_one_location: string;
 	p_two_location: string;
+	createdAt: string;
 }
 
 export interface ICreateGame {

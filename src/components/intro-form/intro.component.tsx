@@ -12,46 +12,42 @@ import * as Ui from "styles/ui";
 import { FONT } from "styles";
 
 export const IntroForm = () => {
-  const dispatch = useAppDispatch();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setFocus,
-  } = useForm<IUserName>({
-    resolver: yupResolver(userNameSchema),
-  });
+	const dispatch = useAppDispatch();
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		setFocus,
+	} = useForm<IUserName>({
+		resolver: yupResolver(userNameSchema),
+	});
 
-  const onSubmit = (data: IUserName) => dispatch(setUserName(data));
+	const onSubmit = (data: IUserName) => dispatch(setUserName(data));
 
-  useEffect(() => {
-    setFocus("name");
-  }, [setFocus]);
+	useEffect(() => {
+		setFocus("name");
+	}, [setFocus]);
 
-  return (
-    <Ui.Container.Main>
-      <Ui.Container.Absolute center>
-        <Ui.Container.Content>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <Ui.Container.Wrapper mb="1rem">
-              <Ui.Paragraph
-                ta={FONT.TEXT_ALIGN.CENTER}
-                fw={FONT.FONT_WEIGHT.BOLD}
-                fz={FONT.SIZE.LARGE}
-              >
-                Hello! Input your name, please.
-              </Ui.Paragraph>
-            </Ui.Container.Wrapper>
-            <Styled.InputWrapper>
-              <Ui.Input {...register("name")} />
-              <Styled.ErrorBox>{errors.name?.message}</Styled.ErrorBox>
-            </Styled.InputWrapper>
-            <Ui.Button type="submit" aria-label="user name submit button">
-              submit
-            </Ui.Button>
-          </form>
-        </Ui.Container.Content>
-      </Ui.Container.Absolute>
-    </Ui.Container.Main>
-  );
+	return (
+		<Ui.Container.Main>
+			<Ui.Container.Absolute center>
+				<Ui.Container.Content>
+					<form onSubmit={handleSubmit(onSubmit)}>
+						<Ui.Container.Wrapper mb="1rem">
+							<Ui.Paragraph ta={FONT.TEXT_ALIGN.CENTER} fw={FONT.WEIGHT.BOLD} fz={FONT.SIZE.LARGE}>
+								Hello! Input your name, please.
+							</Ui.Paragraph>
+						</Ui.Container.Wrapper>
+						<Styled.InputWrapper>
+							<Ui.Input {...register("name")} />
+							<Styled.ErrorBox>{errors.name?.message}</Styled.ErrorBox>
+						</Styled.InputWrapper>
+						<Ui.Button type="submit" aria-label="user name submit button">
+							submit
+						</Ui.Button>
+					</form>
+				</Ui.Container.Content>
+			</Ui.Container.Absolute>
+		</Ui.Container.Main>
+	);
 };
