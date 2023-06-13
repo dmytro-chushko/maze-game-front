@@ -5,9 +5,9 @@ import { useCreateGameMutation, useGetAllPendingGamesQuery } from "redux/api/gam
 import { useAppSelector } from "redux/hooks";
 import { getUserName } from "redux/reducers/user-name.reducer";
 import { socket } from "web-socket/socket";
+import { GAME_EVENT, ROUTES } from "utils/consts";
 
 import * as Styled from "./new-game-button.styled";
-import { ROUTES } from "utils/consts";
 
 export const NewGameButton = () => {
 	const [createGame, { isLoading }] = useCreateGameMutation();
@@ -18,7 +18,7 @@ export const NewGameButton = () => {
 	const handleStartNewGame = async () => {
 		const createdGame = await createGame({ player_one });
 		if ("data" in createdGame) {
-			socket.emit("create-game");
+			socket.emit(GAME_EVENT.CREATE_GAME);
 			navigate(`${ROUTES.GAME}/${createdGame.data._id}`);
 		}
 	};
@@ -28,10 +28,10 @@ export const NewGameButton = () => {
 			console.log("update");
 			refetch();
 		};
-		socket.on("update-game-list", handleUpdate);
+		socket.on(GAME_EVENT.UPDATE_GAME_LIST, handleUpdate);
 
 		return () => {
-			socket.off("update-game-list", handleUpdate);
+			socket.off(GAME_EVENT.UPDATE_GAME_LIST, handleUpdate);
 		};
 	}, []);
 

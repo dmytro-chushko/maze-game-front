@@ -1,11 +1,13 @@
-import { WaitingScreen } from "components/waiting-screen";
-import { GameArea } from "modules/game-area";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+
+import { WaitingScreen } from "components/waiting-screen";
+import { GameArea } from "modules/game-area";
 import { useGetGameByIdQuery } from "redux/api/game.api";
-import * as Ui from "styles/ui";
-import { GAME_STATUS } from "utils/consts";
+import { GAME_EVENT, GAME_STATUS } from "utils/consts";
 import { socket } from "web-socket/socket";
+
+import * as Ui from "styles/ui";
 
 export const Game = () => {
 	const { id } = useParams();
@@ -13,10 +15,10 @@ export const Game = () => {
 
 	useEffect(() => {
 		const handleStartGame = () => refetch();
-		socket.on("start-game", handleStartGame);
+		socket.on(GAME_EVENT.START_GAME, handleStartGame);
 
 		return () => {
-			socket.off("start-game", handleStartGame);
+			socket.off(GAME_EVENT.START_GAME, handleStartGame);
 		};
 	}, [refetch]);
 

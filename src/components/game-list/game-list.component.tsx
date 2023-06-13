@@ -1,15 +1,16 @@
-import { useGetAllPendingGamesQuery, useJoinGameMutation } from "redux/api/game.api";
-import { FONT } from "styles";
+import { useNavigate } from "react-router-dom";
 
-import * as Styled from "./game-list.styled";
-import * as Ui from "styles/ui";
+import { useGetAllPendingGamesQuery, useJoinGameMutation } from "redux/api/game.api";
 import { formatsDateWithTime } from "utils/formatsDateWithTime";
 import { useAppSelector } from "redux/hooks";
 import { getUserName } from "redux/reducers/user-name.reducer";
-import { useNavigate } from "react-router-dom";
-import { ROUTES } from "utils/consts";
+import { GAME_EVENT, ROUTES } from "utils/consts";
 import { socket } from "web-socket/socket";
 import { excludeOwnGame } from "utils/exclude-own-game.hook";
+
+import * as Styled from "./game-list.styled";
+import * as Ui from "styles/ui";
+import { FONT } from "styles";
 
 export const GameList = () => {
 	const { data, isLoading } = useGetAllPendingGamesQuery();
@@ -21,7 +22,7 @@ export const GameList = () => {
 	const handleJoinGame = async (id: string) => {
 		const startedGame = await joinGame({ id, player_two: userName });
 		if ("data" in startedGame) {
-			socket.emit("join-game");
+			socket.emit(GAME_EVENT.JOIN_GAME);
 			navigate(`${ROUTES.GAME}/${startedGame.data._id}`);
 		}
 	};

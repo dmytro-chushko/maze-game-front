@@ -18,3 +18,11 @@ export enum GAME_STATUS {
 	STARTED = "started",
 	FINISHED = "finished",
 }
+
+export enum GAME_EVENT {
+	CREATE_GAME = "create-game",
+	JOIN_GAME = "join-game",
+	START_GAME = "start-game",
+	ABORT_GAME = "abort-game",
+	UPDATE_GAME_LIST = "update-game-list",
+}
