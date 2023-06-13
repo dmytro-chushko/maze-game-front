@@ -12,6 +12,10 @@ export const gameApi = createApi({
 			query: () => ({ url: "" }),
 			providesTags: ["Games"],
 		}),
+		getGameById: builder.query<IGame, string>({
+			query: id => ({ url: id }),
+			providesTags: ["Games"],
+		}),
 		createGame: builder.mutation<IGame, ICreateGame>({
 			query: body => ({
 				url: "",
@@ -37,6 +41,7 @@ export const gameApi = createApi({
 
 export const {
 	useGetAllPendingGamesQuery,
+	useGetGameByIdQuery,
 	useCreateGameMutation,
 	useJoinGameMutation,
 	useAbortGameMutation,
