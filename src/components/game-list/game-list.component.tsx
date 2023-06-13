@@ -9,16 +9,17 @@ import { getUserName } from "redux/reducers/user-name.reducer";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "utils/consts";
 import { socket } from "web-socket/socket";
+import { excludeOwnGame } from "utils/exclude-own-game.hook";
 
 export const GameList = () => {
 	const { data, isLoading } = useGetAllPendingGamesQuery();
 	const [joinGame, { isLoading: isJoining }] = useJoinGameMutation();
 	const navigate = useNavigate();
-	const player_two = useAppSelector(getUserName);
+	const userName = useAppSelector(getUserName);
 	console.log(data);
 
 	const handleJoinGame = async (id: string) => {
-		const startedGame = await joinGame({ id, player_two });
+		const startedGame = await joinGame({ id, player_two: userName });
 		if ("data" in startedGame) {
 			socket.emit("join-game");
 			navigate(`${ROUTES.GAME}/${startedGame.data._id}`);
@@ -33,7 +34,7 @@ export const GameList = () => {
 		<Ui.Container.SubContent>
 			{data && data?.length > 0 ? (
 				<ul>
-					{data.map(game => (
+					{excludeOwnGame(data, userName).map(game => (
 						<Styled.ListItem key={game._id}>
 							<Ui.Paragraph color={FONT.COLOR.SECONDARY} fw={FONT.WEIGHT.MEDIUM}>
 								{formatsDateWithTime(game.createdAt)}
