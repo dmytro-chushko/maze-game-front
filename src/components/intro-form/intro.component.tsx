@@ -40,7 +40,7 @@ export const IntroForm = () => {
 						</Ui.Container.Wrapper>
 						<Styled.InputWrapper>
 							<Ui.Input {...register("name")} />
-							<Styled.ErrorBox>{errors.name?.message}</Styled.ErrorBox>
+							<Ui.ErrorBox>{errors.name?.message}</Ui.ErrorBox>
 						</Styled.InputWrapper>
 						<Ui.Button type="submit" aria-label="user name submit button">
 							submit
