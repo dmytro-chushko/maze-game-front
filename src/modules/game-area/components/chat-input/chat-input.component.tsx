@@ -5,15 +5,19 @@ import { useParams } from "react-router-dom";
 import { ITextMessage } from "types/chat.types";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { messageSchema } from "utils/validation";
+import { socket } from "web-socket/socket";
+import { Socket } from "socket.io-client";
+import { useAppSelector } from "redux/hooks";
+import { getUserName } from "redux/reducers/user-name.reducer";
+import { CHAT_EVENT } from "utils/consts";
 
 import * as Styled from "./chat-input.styled";
 import * as Ui from "styles/ui";
-import { socket } from "web-socket/socket";
-import { Socket, io } from "socket.io-client";
 
 export const ChatInput = () => {
 	const { id } = useParams();
 	const socketRef = useRef<Socket | null>(null);
+	const sender = useAppSelector(getUserName);
 	const {
 		register,
 		handleSubmit,
@@ -26,7 +30,7 @@ export const ChatInput = () => {
 
 	const onSubmit = (data: ITextMessage) => {
 		const socket = socketRef.current;
-		if (socket) socket.emit("message", { chatId: id, message: data.message });
+		if (socket) socket.emit(CHAT_EVENT.MESSAGE, { chatId: id, sender, message: data.message });
 		reset();
 	};
 
@@ -36,13 +40,11 @@ export const ChatInput = () => {
 
 	useEffect(() => {
 		socketRef.current = socket;
-		socket.emit("join", { chatId: id });
-		socket.on("message", () => console.log("message"));
+		socket.emit(CHAT_EVENT.JOIN, { chatId: id });
 
 		return () => {
-			socket.emit("leave", { chatId: id });
+			socket.emit(CHAT_EVENT.LEAVE, { chatId: id });
 			socket.disconnect();
-			socket.off();
 		};
 	}, [id]);
 

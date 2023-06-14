@@ -3,6 +3,12 @@ export interface ITextMessage {
 }
 
 export interface ISocketMessage {
-	chatIs: string;
+	chatId: string;
 	message: string;
+}
+
+export interface IMessage {
+	sender: string;
+	message: string;
+	timestamp: string;
 }

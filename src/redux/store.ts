@@ -4,10 +4,12 @@ import { persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 
 import { persistedReducer } from "./persist-config";
 import { errorHandler } from "./middlewares/error-handler.middleware";
 import { gameApi } from "./api/game.api";
+import { chatMessages } from "./reducers/messages.reducer";
 
 export const store = configureStore({
 	reducer: {
 		user: persistedReducer,
+		messages: chatMessages.reducer,
 		[gameApi.reducerPath]: gameApi.reducer,
 	},
 	middleware: getDefaultMiddleware =>
