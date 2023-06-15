@@ -12,6 +12,8 @@ export const FlexWraper = styled.div`
 `;
 
 export const InputContainer = styled(Container.SubContent)`
+	position: relative;
+
 	flex-grow: 4;
 
 	padding: 0.5rem;

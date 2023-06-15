@@ -7,9 +7,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { messageSchema } from "utils/validation";
 import { socket } from "web-socket/socket";
 import { Socket } from "socket.io-client";
-import { useAppSelector } from "redux/hooks";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { getUserName } from "redux/reducers/user-name.reducer";
 import { CHAT_EVENT } from "utils/consts";
+import { addNewMessage } from "redux/reducers/messages.reducer";
+import { getTime } from "utils/get-time";
 
 import * as Styled from "./chat-input.styled";
 import * as Ui from "styles/ui";
@@ -18,6 +20,7 @@ export const ChatInput = () => {
 	const { id } = useParams();
 	const socketRef = useRef<Socket | null>(null);
 	const sender = useAppSelector(getUserName);
+	const dispatch = useAppDispatch();
 	const {
 		register,
 		handleSubmit,
@@ -30,6 +33,8 @@ export const ChatInput = () => {
 
 	const onSubmit = (data: ITextMessage) => {
 		const socket = socketRef.current;
+		const timestamp = getTime();
+		dispatch(addNewMessage({ sender: "You", message: data.message, timestamp }));
 		if (socket) socket.emit(CHAT_EVENT.MESSAGE, { chatId: id, sender, message: data.message });
 		reset();
 	};

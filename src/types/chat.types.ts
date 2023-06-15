@@ -12,3 +12,7 @@ export interface IMessage {
 	message: string;
 	timestamp: string;
 }
+export interface IRecivedMessage {
+	sender: string;
+	message: string;
+}
