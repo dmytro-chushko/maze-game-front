@@ -4,9 +4,10 @@ import { generateMaze } from "utils/generate-maze";
 
 export const Maze = () => {
 	const mazeRef = useRef<HTMLCanvasElement>(null);
-	const maze = generateMaze(3);
+	const { maze, exit } = generateMaze(9);
 
 	console.log(maze);
+	console.log(exit);
 
 	useEffect(() => {
 		const canvas = mazeRef.current;

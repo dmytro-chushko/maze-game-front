@@ -4,8 +4,16 @@ interface IEraiser {
 	x: number;
 	y: number;
 }
+interface IExit {
+	exitX: number;
+	exitY: number;
+}
+interface IMaze {
+	maze: maze;
+	exit: IExit;
+}
 
-export function generateMaze(size: number) {
+export function generateMaze(size: number): IMaze {
 	const maze: maze = [];
 	const eraiser: IEraiser = { x: 0, y: 0 };
 
@@ -23,7 +31,9 @@ export function generateMaze(size: number) {
 		moveEraiser(eraiser, maze);
 	}
 
-	return maze;
+	const exit = generateExit(size);
+
+	return { maze, exit };
 }
 
 function moveEraiser(eraiser: IEraiser, maze: maze) {
@@ -72,4 +82,33 @@ function isMazeFinished(maze: maze) {
 	}
 
 	return true;
+}
+
+function generateExit(size: number): IExit {
+	const exitSide = Math.floor(Math.random() * 4);
+	let exitX: number, exitY: number;
+
+	switch (exitSide) {
+		case 0: // верх
+			exitX = 0;
+			exitY = Math.floor(Math.random() * size) * 2;
+			break;
+		case 1: // право
+			exitX = Math.floor(Math.random() * size) * 2;
+			exitY = size - 1;
+			break;
+		case 2: // низ
+			exitX = size - 1;
+			exitY = Math.floor(Math.random() * size) * 2;
+			break;
+		case 3: // ліво
+			exitX = Math.floor(Math.random() * size) * 2;
+			exitY = 0;
+			break;
+		default:
+			exitX = 0;
+			exitY = 0;
+	}
+
+	return { exitX, exitY };
 }
