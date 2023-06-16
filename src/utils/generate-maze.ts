@@ -27,7 +27,7 @@ export function generateMaze(size: number) {
 }
 
 function moveEraiser(eraiser: IEraiser, maze: maze) {
-	maze[eraiser.x][eraiser.y] = true;
+	maze[eraiser.y][eraiser.x] = true;
 	const directions = [];
 
 	if (eraiser.x > 0) {
