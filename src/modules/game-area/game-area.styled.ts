@@ -3,7 +3,7 @@ import { COMMON } from "styles";
 import { Container } from "styles/ui";
 
 export const GameContainer = styled(Container.Content)`
-	width: 45rem;
+	width: 40rem;
 
 	canvas {
 		display: block;

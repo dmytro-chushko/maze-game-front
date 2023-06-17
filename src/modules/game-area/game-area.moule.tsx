@@ -11,7 +11,7 @@ export const GameArea = () => {
 	return (
 		<Styled.GameContainer>
 			<Styled.FlexWrapper mb="1rem">
-				<Styled.FlexItemWrapper fg={2}>
+				<Styled.FlexItemWrapper fg={0}>
 					<Styled.FlexCentered>
 						<Maze />
 					</Styled.FlexCentered>
