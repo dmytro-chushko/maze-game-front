@@ -5,11 +5,13 @@ import { persistedReducer } from "./persist-config";
 import { errorHandler } from "./middlewares/error-handler.middleware";
 import { gameApi } from "./api/game.api";
 import { chatMessages } from "./reducers/messages.reducer";
+import { gameData } from "./reducers/game.raducer";
 
 export const store = configureStore({
 	reducer: {
 		user: persistedReducer,
 		messages: chatMessages.reducer,
+		game: gameData.reducer,
 		[gameApi.reducerPath]: gameApi.reducer,
 	},
 	middleware: getDefaultMiddleware =>

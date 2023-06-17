@@ -10,9 +10,10 @@ export enum QUERY_URL {
 }
 
 export enum REDUCER_PATHES {
-	GAME = "game",
+	GAME_API = "game-api",
 	USER = "user",
 	MESSAGES = "messages",
+	GAME = "game",
 }
 
 export enum GAME_STATUS {

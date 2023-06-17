@@ -1,15 +1,17 @@
 import { GAME_STATUS } from "utils/consts";
+import { IExit, IPoint, maze } from "./maze.types";
 
 export interface IGame {
 	_id: string;
 	player_one: string;
 	player_two: string;
 	status: GAME_STATUS;
-	turn: string;
+	turn: number;
 	winner: string;
-	maze: string;
-	p_one_location: string;
-	p_two_location: string;
+	maze: maze;
+	p_one_location: IPoint;
+	p_two_location: IPoint;
+	exit: IExit;
 	createdAt: string;
 }
 
@@ -20,4 +22,8 @@ export interface ICreateGame {
 export interface IJoinGame {
 	id: string;
 	player_two: string;
+}
+
+export interface IGameData {
+	turn: boolean;
 }

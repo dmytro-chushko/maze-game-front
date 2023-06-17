@@ -4,7 +4,7 @@ import { ICreateGame, IGame, IJoinGame } from "types/game.types";
 import { QUERY_URL, REDUCER_PATHES } from "utils/consts";
 
 export const gameApi = createApi({
-	reducerPath: REDUCER_PATHES.GAME,
+	reducerPath: REDUCER_PATHES.GAME_API,
 	baseQuery: baseQuery(QUERY_URL.GAME),
 	tagTypes: ["Games"],
 	endpoints: builder => ({
