@@ -1,1 +1,1 @@
-export { GameArea } from "./game-area.moule";
+export { GameArea } from "./game-area.module";

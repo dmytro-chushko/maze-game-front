@@ -3,6 +3,7 @@ import { ChatScreen } from "./components/chat-screen";
 import { GameControls } from "./components/game-controls";
 import { Maze } from "./components/maze";
 import { MovementControls } from "./components/movement-controls";
+import { Turn } from "./components/turn";
 
 import * as Styled from "./game-area.styled";
 import * as Ui from "styles/ui";
@@ -17,7 +18,10 @@ export const GameArea = () => {
 					</Styled.FlexCentered>
 				</Styled.FlexItemWrapper>
 				<Styled.FlexItemWrapper fg={1}>
-					<GameControls />
+					<Ui.Container.Wrapper mb="1rem">
+						<GameControls />
+					</Ui.Container.Wrapper>
+					<Turn />
 				</Styled.FlexItemWrapper>
 			</Styled.FlexWrapper>
 			<Styled.FlexWrapper>

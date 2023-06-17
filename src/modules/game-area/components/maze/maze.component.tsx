@@ -3,33 +3,30 @@ import { MazeContainer } from "./maze.styled";
 import { addPointsToCanvas } from "utils/add-points-to-canvas";
 import { useParams } from "react-router-dom";
 import { useGetGameByIdQuery } from "redux/api/game.api";
-import { useAppDispatch } from "redux/hooks";
+import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { setTurn } from "redux/reducers/game.raducer";
+import { getUserName } from "redux/reducers/user-name.reducer";
 
 export const Maze = () => {
 	const { id } = useParams();
 	const { data } = useGetGameByIdQuery(id || "");
 	const dispatch = useAppDispatch();
+	const userName = useAppSelector(getUserName);
 	const mazeRef = useRef<HTMLCanvasElement>(null);
-	// const mazeSize = 15;
-	// const { maze, exit, playerOnePoint, playerTwoPoint } = generateMaze(mazeSize);
-
-	// console.log(maze);
-	// console.log(exit);
-	// console.log(playerOnePoint);
-	// console.log(playerTwoPoint);
 
 	useEffect(() => {
 		const canvas = mazeRef.current;
 		const context = canvas?.getContext("2d");
 
 		if (data) {
-			const { maze, p_one_location, p_two_location, exit, turn } = data;
-			const mazeSize = maze.length;
+			const { player_one, player_two, game_flow_maze, p_one_location, p_two_location, exit, turn } =
+				data;
+			const mazeSize = game_flow_maze.length;
 
-			dispatch(setTurn(!!turn ? true : false));
+			if (userName === player_one) dispatch(setTurn(!!turn ? true : false));
+			if (userName === player_two) dispatch(setTurn(!turn ? true : false));
 
-			maze.forEach((row, y) =>
+			game_flow_maze.forEach((row, y) =>
 				row.forEach((cell, x) => {
 					const color = cell ? "white" : "#6B7280";
 					if (context && canvas) {
@@ -47,16 +44,20 @@ export const Maze = () => {
 							addPointsToCanvas("E", mazeSize, context, canvas, "red", x, y);
 						}
 						if (y === p_one_location.pointY && x === p_one_location.pointX) {
-							addPointsToCanvas("P1", mazeSize, context, canvas, "green", x, y);
+							if (userName === player_one) {
+								addPointsToCanvas("point", mazeSize, context, canvas, "green", x, y);
+							}
 						}
 						if (y === p_two_location.pointY && x === p_two_location.pointX) {
-							addPointsToCanvas("P2", mazeSize, context, canvas, "green", x, y);
+							if (userName === player_two) {
+								addPointsToCanvas("point", mazeSize, context, canvas, "green", x, y);
+							}
 						}
 					}
 				}),
 			);
 		}
-	}, [data, dispatch]);
+	}, [data, dispatch, userName]);
 
 	return (
 		<MazeContainer>

@@ -16,6 +16,11 @@ export const Button = styled.button`
 
 	transition: ${COMMON.TRANSITION};
 
+	:disabled {
+		color: ${FONT.COLOR.DISABLED};
+		cursor: auto;
+	}
+
 	:hover:not(:disabled),
 	:focus:not(:disabled) {
 		box-shadow: ${COMMON.SHADOW};

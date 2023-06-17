@@ -9,6 +9,7 @@ export enum COLOR {
 	SECONDARY = "#FFFFFF",
 	ACCENT = "#F2EA86",
 	ERROR = "#DC2626",
+	DISABLED = "#6B7280",
 }
 
 export enum WEIGHT {

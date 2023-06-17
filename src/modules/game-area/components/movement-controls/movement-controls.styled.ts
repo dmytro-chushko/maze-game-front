@@ -33,6 +33,7 @@ export const JoindGreedItem = styled.div`
 const IconStyles = css`
 	width: 1rem;
 	height: 1rem;
+	fill: currentColor;
 `;
 
 export const IconUp = styled(ArrowUp)`
