@@ -9,7 +9,8 @@ export interface IGame {
 	turn: number;
 	winner: string;
 	maze: maze;
-	game_flow_maze: maze;
+	p_one_game_flow_maze: maze;
+	p_two_game_flow_maze: maze;
 	p_one_location: IPoint;
 	p_two_location: IPoint;
 	exit: IExit;

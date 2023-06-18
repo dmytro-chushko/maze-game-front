@@ -28,6 +28,7 @@ export enum GAME_EVENT {
 	START_GAME = "start-game",
 	ABORT_GAME = "abort-game",
 	UPDATE_GAME_LIST = "update-game-list",
+	MOVE = "move",
 }
 
 export enum CHAT_EVENT {

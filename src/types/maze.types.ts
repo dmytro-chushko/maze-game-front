@@ -1,4 +1,4 @@
-export type maze = boolean[][];
+export type maze = (boolean | "W")[][];
 
 export interface IExit {
 	exitX: number;
