@@ -29,3 +29,12 @@ export interface IJoinGame {
 export interface IGameData {
 	turn: boolean;
 }
+
+export interface IGiveUpMessage {
+	user: string;
+	message: string;
+}
+
+export interface IMoveMessage {
+	message: string;
+}

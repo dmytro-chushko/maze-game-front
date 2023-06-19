@@ -8,11 +8,17 @@ import { IRecivedMessage } from "types/chat.types";
 import { getTime } from "utils/get-time";
 
 import * as Styled from "./chat-screen.styled";
+import { CHAT_EVENT, GAME_EVENT } from "utils/consts";
+import { IGiveUpMessage } from "types/game.types";
+import { useParams } from "react-router-dom";
+import { useGetGameByIdQuery } from "redux/api/game.api";
 
 export const ChatScreen = () => {
 	const dispatch = useAppDispatch();
 	const messages = useAppSelector(getMessages);
 	const name = useAppSelector(getUserName);
+	const { id } = useParams();
+	const { refetch } = useGetGameByIdQuery(id || "");
 
 	useEffect(() => {
 		const handleSetMessage = (message: IRecivedMessage) => {
@@ -22,10 +28,19 @@ export const ChatScreen = () => {
 			}
 		};
 
-		socket.on("message", handleSetMessage);
+		const handleGiveUp = (payload: IGiveUpMessage) => {
+			const { user, message } = payload;
+			const timestamp = getTime();
+			dispatch(addNewMessage({ sender: "", message: `Player ${user} ${message}`, timestamp }));
+			refetch();
+		};
+
+		socket.on(CHAT_EVENT.MESSAGE, handleSetMessage);
+		socket.on(GAME_EVENT.GIVE_UP, handleGiveUp);
 
 		return () => {
-			socket.off("message", handleSetMessage);
+			socket.off(CHAT_EVENT.MESSAGE, handleSetMessage);
+			socket.on(GAME_EVENT.GIVE_UP, handleGiveUp);
 		};
 	}, []);
 

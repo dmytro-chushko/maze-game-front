@@ -8,7 +8,6 @@ import { setTurn } from "redux/reducers/game.raducer";
 import { getUserName } from "redux/reducers/user-name.reducer";
 import { socket } from "web-socket/socket";
 import { GAME_EVENT } from "utils/consts";
-import { maze } from "types/maze.types";
 
 export const Maze = () => {
 	const { id } = useParams();

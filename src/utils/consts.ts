@@ -29,10 +29,18 @@ export enum GAME_EVENT {
 	ABORT_GAME = "abort-game",
 	UPDATE_GAME_LIST = "update-game-list",
 	MOVE = "move",
+	GIVE_UP = "give-up",
 }
 
 export enum CHAT_EVENT {
 	JOIN = "join",
 	LEAVE = "leave",
 	MESSAGE = "message",
+}
+
+export enum MOVE {
+	UP = "/up",
+	DOWN = "/down",
+	LEFT = "/left",
+	RIGHT = "/right",
 }

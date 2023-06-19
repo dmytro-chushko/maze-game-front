@@ -9,18 +9,21 @@ import { socket } from "web-socket/socket";
 import { Socket } from "socket.io-client";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { getUserName } from "redux/reducers/user-name.reducer";
-import { CHAT_EVENT } from "utils/consts";
+import { CHAT_EVENT, GAME_EVENT, MOVE } from "utils/consts";
 import { addNewMessage } from "redux/reducers/messages.reducer";
 import { getTime } from "utils/get-time";
 
 import * as Styled from "./chat-input.styled";
 import * as Ui from "styles/ui";
+import { isMovement } from "utils/check-the-movement";
+import { getTurn } from "redux/reducers/game.raducer";
 
 export const ChatInput = () => {
 	const { id } = useParams();
 	const socketRef = useRef<Socket | null>(null);
 	const sender = useAppSelector(getUserName);
 	const dispatch = useAppDispatch();
+	const turn = useAppSelector(getTurn);
 	const {
 		register,
 		handleSubmit,
@@ -32,10 +35,38 @@ export const ChatInput = () => {
 	});
 
 	const onSubmit = (data: ITextMessage) => {
+		const { message } = data;
+		const movement = message.toLowerCase().trim();
 		const socket = socketRef.current;
 		const timestamp = getTime();
+
+		if (isMovement(message) && socket) {
+			if (!turn) {
+				dispatch(
+					addNewMessage({
+						sender: "",
+						message: `wait your turn`,
+						timestamp,
+					}),
+				);
+
+				return;
+			}
+			socket.emit(GAME_EVENT.MOVE, { id, user: sender, move: movement });
+			dispatch(
+				addNewMessage({
+					sender: "",
+					message: `going ${movement.slice(1)}`,
+					timestamp,
+				}),
+			);
+			reset();
+
+			return;
+		}
 		dispatch(addNewMessage({ sender: "You", message: data.message, timestamp }));
-		if (socket) socket.emit(CHAT_EVENT.MESSAGE, { chatId: id, sender, message: data.message });
+		if (socket)
+			socket.emit(CHAT_EVENT.MESSAGE, { chatId: id, sender, message: data.message.trim() });
 		reset();
 	};
 
