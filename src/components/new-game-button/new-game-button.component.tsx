@@ -25,7 +25,6 @@ export const NewGameButton = () => {
 
 	useEffect(() => {
 		const handleUpdate = () => {
-			console.log("update");
 			refetch();
 		};
 		socket.on(GAME_EVENT.UPDATE_GAME_LIST, handleUpdate);
@@ -33,7 +32,7 @@ export const NewGameButton = () => {
 		return () => {
 			socket.off(GAME_EVENT.UPDATE_GAME_LIST, handleUpdate);
 		};
-	}, []);
+	}, [refetch]);
 
 	return (
 		<Styled.StartButton type="button" onClick={handleStartNewGame} disabled={isLoading}>

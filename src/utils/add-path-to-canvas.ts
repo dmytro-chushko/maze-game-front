@@ -9,6 +9,8 @@ export const addPathToCanvas = (
 	canvasX: number,
 	canvasY: number,
 ) => {
+	context?.setLineDash([2, 2]);
+
 	if (arr[canvasY][canvasX] && arr[canvasY][canvasX] !== MAZE_ELEMENT.WALL) {
 		if (
 			canvasY < arr.length - 1 &&

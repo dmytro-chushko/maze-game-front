@@ -12,8 +12,11 @@ export const chatMessages = createSlice({
 		addNewMessage(state, action: PayloadAction<IMessage>) {
 			return [...state, action.payload];
 		},
+		removeAllMessages() {
+			return [];
+		},
 	},
 });
 
-export const { addNewMessage } = chatMessages.actions;
+export const { addNewMessage, removeAllMessages } = chatMessages.actions;
 export const getMessages = (state: RootState) => state.messages;

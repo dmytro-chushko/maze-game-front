@@ -80,7 +80,6 @@ export const ChatInput = () => {
 
 		return () => {
 			socket.emit(CHAT_EVENT.LEAVE, { chatId: id, user: sender });
-			socket.disconnect();
 		};
 	}, [id, sender]);
 

@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "redux/hooks";
-import { getTurn } from "redux/reducers/game.raducer";
+import { getTurn, setTurn } from "redux/reducers/game.raducer";
 import { getUserName } from "redux/reducers/user-name.reducer";
 import { useParams } from "react-router-dom";
 import { socket } from "web-socket/socket";
@@ -29,6 +29,7 @@ export const MovementControls = () => {
 					timestamp,
 				}),
 			);
+			dispatch(setTurn(false));
 			socket.emit(GAME_EVENT.MOVE, { id, user, move });
 		}
 	};

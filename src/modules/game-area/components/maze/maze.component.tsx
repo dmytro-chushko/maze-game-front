@@ -38,7 +38,8 @@ export const Maze = () => {
 				exit,
 				turn,
 			} = data;
-			const game_flow_maze = userName === player_one ? p_one_game_flow_maze : p_two_game_flow_maze;
+			const game_flow_maze =
+				userName === player_one ? [...p_one_game_flow_maze] : [...p_two_game_flow_maze];
 
 			if (userName === player_one) {
 				dispatch(setTurn(!!turn ? true : false));
@@ -48,7 +49,6 @@ export const Maze = () => {
 			}
 
 			const mazeSize = game_flow_maze.length;
-			context?.setLineDash([2, 2]);
 
 			game_flow_maze.forEach((row, y, arr) =>
 				row.forEach((cell, x) => {
