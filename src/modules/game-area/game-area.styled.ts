@@ -12,11 +12,18 @@ export const GameContainer = styled(Container.Content)`
 	}
 `;
 
-export const FlexWrapper = styled.div<{ mb?: string }>`
+export const FlexWrapper = styled.div<{ mb?: string; column?: boolean }>`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	gap: 2rem;
+
+	${({ column }) =>
+		column &&
+		css`
+			flex-direction: column;
+			justify-content: space-around;
+		`};
 
 	${({ mb }) =>
 		mb &&

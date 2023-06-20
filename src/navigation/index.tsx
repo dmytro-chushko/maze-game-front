@@ -5,6 +5,7 @@ import { Dashboard } from "pages/dashboard";
 import { Intro } from "pages/intro";
 import { Game } from "pages/game";
 import { ROUTES } from "utils/consts";
+import { PageNotFound } from "pages/not-found";
 
 export const MainRouter = () => (
 	<BrowserRouter>
@@ -16,6 +17,7 @@ export const MainRouter = () => (
 				<Route path={ROUTES.DASHBOARD} element={<Dashboard />} />
 				<Route path={ROUTES.GAME_ID} element={<Game />} />
 			</Route>
+			<Route path="*" element={<PageNotFound />} />
 		</Routes>
 	</BrowserRouter>
 );

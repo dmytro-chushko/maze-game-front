@@ -1,5 +1,5 @@
-import { useAppSelector } from "redux/hooks";
-import { getUserName } from "redux/reducers/user-name.reducer";
+import { useGetUserName } from "redux/hooks";
+
 import { FONT } from "styles";
 import { Paragraph } from "styles/ui";
 
@@ -8,7 +8,7 @@ interface IWinner {
 }
 
 export const Winner: React.FC<IWinner> = ({ winner }) => {
-	const userName = useAppSelector(getUserName);
+	const userName = useGetUserName();
 
 	return (
 		<Paragraph ta={FONT.TEXT_ALIGN.CENTER} fw={FONT.WEIGHT.BOLD} fz={FONT.SIZE.LARGE}>

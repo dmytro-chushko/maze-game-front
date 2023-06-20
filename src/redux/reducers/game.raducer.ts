@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import { RootState } from "redux/store";
 import { IGameData } from "types/game.types";
 import { REDUCER_PATHES } from "utils/consts";

@@ -49,4 +49,6 @@ export enum MOVE {
 
 export enum MAZE_ELEMENT {
 	WALL = "W",
+	EXIT = "E",
+	POINT = "point",
 }

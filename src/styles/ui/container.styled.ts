@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+
 import { COLOR, COMMON } from "styles";
 
 export const Main = styled.div`

@@ -1,8 +1,8 @@
 import { PersonalizedGreeting } from "components/personalized-greeting";
 import { NewGameButton } from "components/new-game-button";
+import { GameList } from "components/game-list";
 
 import * as Ui from "styles/ui";
-import { GameList } from "components/game-list";
 
 export const Dashboard = () => {
 	return (

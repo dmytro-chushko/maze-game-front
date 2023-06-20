@@ -12,11 +12,11 @@ import { getUserName } from "redux/reducers/user-name.reducer";
 import { CHAT_EVENT, GAME_EVENT } from "utils/consts";
 import { addNewMessage } from "redux/reducers/messages.reducer";
 import { getTime } from "utils/get-time";
+import { isMovement } from "utils/check-the-movement";
+import { getTurn } from "redux/reducers/game.raducer";
 
 import * as Styled from "./chat-input.styled";
 import * as Ui from "styles/ui";
-import { isMovement } from "utils/check-the-movement";
-import { getTurn } from "redux/reducers/game.raducer";
 
 export const ChatInput = () => {
 	const { id } = useParams();

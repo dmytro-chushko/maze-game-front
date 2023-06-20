@@ -25,11 +25,13 @@ export const GameArea = () => {
 					</Styled.FlexCentered>
 				</Styled.FlexItemWrapper>
 				<Styled.FlexItemWrapper fg={1}>
-					<Ui.Container.Wrapper mb="1rem">
-						<GameControls />
-					</Ui.Container.Wrapper>
-					{!data?.winner && <Turn />}
-					{!!data?.winner && <Winner winner={data.winner} />}
+					<Styled.FlexWrapper column>
+						<Ui.Container.Wrapper mb="1rem">
+							<GameControls />
+						</Ui.Container.Wrapper>
+						{!data?.winner && <Turn />}
+						{!!data?.winner && <Winner winner={data.winner} />}
+					</Styled.FlexWrapper>
 				</Styled.FlexItemWrapper>
 			</Styled.FlexWrapper>
 			<Styled.FlexWrapper>

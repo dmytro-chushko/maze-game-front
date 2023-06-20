@@ -4,7 +4,7 @@ import { getPadTimeStamp } from "utils/get-pad-time-stamp";
 
 export const Timer = () => {
 	const [timeLeft, setTimeLeft] = useState<number>(0);
-	const minutes = getPadTimeStamp(Math.floor(timeLeft / 60));
+	const minutes = Math.floor(timeLeft / 60);
 	const seconds = getPadTimeStamp(timeLeft - +minutes * 60);
 
 	useEffect(() => {

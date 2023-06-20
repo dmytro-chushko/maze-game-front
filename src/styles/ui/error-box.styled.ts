@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import { FONT } from "styles";
 
 export const ErrorBox = styled.p`

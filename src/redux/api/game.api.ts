@@ -1,4 +1,5 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
+
 import { baseQuery } from "redux/base-query";
 import { ICreateGame, IGame, IJoinGame } from "types/game.types";
 import { QUERY_URL, REDUCER_PATHES } from "utils/consts";

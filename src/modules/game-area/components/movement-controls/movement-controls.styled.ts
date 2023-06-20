@@ -4,6 +4,7 @@ import { ReactComponent as ArrowUp } from "assets/arrow-up.svg";
 import { ReactComponent as ArrowDown } from "assets/arrow-down.svg";
 import { ReactComponent as ArrowLeft } from "assets/arrow-left.svg";
 import { ReactComponent as ArrowRight } from "assets/arrow-right.svg";
+
 import { Button } from "styles/ui";
 
 export const ControlsContainer = styled.div`

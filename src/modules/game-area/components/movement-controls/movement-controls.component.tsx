@@ -1,18 +1,18 @@
-import { useAppDispatch, useAppSelector } from "redux/hooks";
-import { getTurn, setTurn } from "redux/reducers/game.raducer";
-import { getUserName } from "redux/reducers/user-name.reducer";
 import { useParams } from "react-router-dom";
+
+import { useAppDispatch, useAppSelector, useGetUserName } from "redux/hooks";
+import { getTurn, setTurn } from "redux/reducers/game.raducer";
 import { socket } from "web-socket/socket";
 import { GAME_EVENT } from "utils/consts";
-
-import * as Styled from "./movement-controls.styled";
 import { useGetGameByIdQuery } from "redux/api/game.api";
 import { addNewMessage } from "redux/reducers/messages.reducer";
 import { getTime } from "utils/get-time";
 
+import * as Styled from "./movement-controls.styled";
+
 export const MovementControls = () => {
 	const turn = useAppSelector(getTurn);
-	const user = useAppSelector(getUserName);
+	const user = useGetUserName();
 	const dispatch = useAppDispatch();
 	const { id } = useParams();
 	const { data } = useGetGameByIdQuery(id || "");

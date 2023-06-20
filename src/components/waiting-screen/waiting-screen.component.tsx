@@ -25,7 +25,6 @@ export const WaitingScreen = () => {
 
 	useEffect(() => {
 		const handleUpdate = () => {
-			console.log("update");
 			refetch();
 		};
 		socket.on(GAME_EVENT.UPDATE_GAME_LIST, handleUpdate);
@@ -33,7 +32,7 @@ export const WaitingScreen = () => {
 		return () => {
 			socket.off(GAME_EVENT.UPDATE_GAME_LIST, handleUpdate);
 		};
-	}, []);
+	}, [refetch]);
 
 	return (
 		<Ui.Container.Content>

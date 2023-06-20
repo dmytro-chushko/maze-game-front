@@ -1,22 +1,23 @@
 import { useEffect, useRef } from "react";
+import { useParams } from "react-router-dom";
+
 import { MazeContainer } from "./maze.styled";
 import { addPointsToCanvas } from "utils/add-points-to-canvas";
-import { useParams } from "react-router-dom";
 import { useGetGameByIdQuery } from "redux/api/game.api";
-import { useAppDispatch, useAppSelector } from "redux/hooks";
+import { useAppDispatch, useGetUserName } from "redux/hooks";
 import { setTurn } from "redux/reducers/game.raducer";
-import { getUserName } from "redux/reducers/user-name.reducer";
 import { socket } from "web-socket/socket";
-import { GAME_EVENT } from "utils/consts";
+import { GAME_EVENT, MAZE_ELEMENT } from "utils/consts";
 import { addPathToCanvas } from "utils/add-path-to-canvas";
-import { COLOR } from "styles";
 import { addMazeElementsToCanvas } from "utils/add-maze-elements-to-canvas";
+
+import { COLOR } from "styles";
 
 export const Maze = () => {
 	const { id } = useParams();
 	const { data, refetch } = useGetGameByIdQuery(id || "");
 	const dispatch = useAppDispatch();
-	const userName = useAppSelector(getUserName);
+	const userName = useGetUserName();
 	const mazeRef = useRef<HTMLCanvasElement>(null);
 
 	useEffect(() => {
@@ -60,16 +61,32 @@ export const Maze = () => {
 						addPathToCanvas(arr, cellSize, context, COLOR.BGC.DARK, x, y);
 
 						if (y === exit.exitY && x === exit.exitX) {
-							addPointsToCanvas("E", mazeSize, context, canvas, "red", x, y);
+							addPointsToCanvas(MAZE_ELEMENT.EXIT, mazeSize, context, canvas, "red", x, y);
 						}
 						if (y === p_one_location.pointY && x === p_one_location.pointX) {
 							if (userName === player_one) {
-								addPointsToCanvas("point", mazeSize, context, canvas, COLOR.BGC.DARK, x, y);
+								addPointsToCanvas(
+									MAZE_ELEMENT.POINT,
+									mazeSize,
+									context,
+									canvas,
+									COLOR.BGC.DARK,
+									x,
+									y,
+								);
 							}
 						}
 						if (y === p_two_location.pointY && x === p_two_location.pointX) {
 							if (userName === player_two) {
-								addPointsToCanvas("point", mazeSize, context, canvas, COLOR.BGC.DARK, x, y);
+								addPointsToCanvas(
+									MAZE_ELEMENT.POINT,
+									mazeSize,
+									context,
+									canvas,
+									COLOR.BGC.DARK,
+									x,
+									y,
+								);
 							}
 						}
 					}

@@ -1,22 +1,21 @@
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import { socket } from "web-socket/socket";
-import { useAppDispatch, useAppSelector } from "redux/hooks";
+import { useAppDispatch, useAppSelector, useGetUserName } from "redux/hooks";
 import { addNewMessage, getMessages } from "redux/reducers/messages.reducer";
-import { getUserName } from "redux/reducers/user-name.reducer";
 import { IDisconnectMessage, IRecivedMessage } from "types/chat.types";
 import { getTime } from "utils/get-time";
-
-import * as Styled from "./chat-screen.styled";
 import { CHAT_EVENT, GAME_EVENT } from "utils/consts";
 import { IGiveUpMessage } from "types/game.types";
-import { useParams } from "react-router-dom";
 import { useGetGameByIdQuery } from "redux/api/game.api";
+
+import * as Styled from "./chat-screen.styled";
 
 export const ChatScreen = () => {
 	const dispatch = useAppDispatch();
 	const messages = useAppSelector(getMessages);
-	const name = useAppSelector(getUserName);
+	const name = useGetUserName();
 	const { id } = useParams();
 	const { data, refetch } = useGetGameByIdQuery(id || "");
 
