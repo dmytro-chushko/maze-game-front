@@ -16,3 +16,7 @@ export interface IRecivedMessage {
 	sender: string;
 	message: string;
 }
+
+export interface IDisconnectMessage {
+	user: string;
+}

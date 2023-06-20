@@ -8,6 +8,9 @@ import { setTurn } from "redux/reducers/game.raducer";
 import { getUserName } from "redux/reducers/user-name.reducer";
 import { socket } from "web-socket/socket";
 import { GAME_EVENT } from "utils/consts";
+import { addPathToCanvas } from "utils/add-path-to-canvas";
+import { COLOR } from "styles";
+import { addMazeElementsToCanvas } from "utils/add-maze-elements-to-canvas";
 
 export const Maze = () => {
 	const { id } = useParams();
@@ -45,40 +48,28 @@ export const Maze = () => {
 			}
 
 			const mazeSize = game_flow_maze.length;
+			context?.setLineDash([2, 2]);
 
-			game_flow_maze.forEach((row, y) =>
+			game_flow_maze.forEach((row, y, arr) =>
 				row.forEach((cell, x) => {
 					if (context && canvas) {
-						context.beginPath();
-						context.rect(
-							(x * canvas.width) / mazeSize,
-							(y * canvas.height) / mazeSize,
-							canvas.width / mazeSize,
-							canvas.width / mazeSize,
-						);
-						switch (cell) {
-							case true:
-								context.fillStyle = "white";
-								break;
-							case false:
-								context.fillStyle = "#6B7280";
-								break;
-							case "W":
-								context.fillStyle = "black";
-						}
-						context.fill();
+						const cellSize = canvas?.width / mazeSize;
+
+						addMazeElementsToCanvas(context, cellSize, x, y, cell);
+
+						addPathToCanvas(arr, cellSize, context, COLOR.BGC.DARK, x, y);
 
 						if (y === exit.exitY && x === exit.exitX) {
 							addPointsToCanvas("E", mazeSize, context, canvas, "red", x, y);
 						}
 						if (y === p_one_location.pointY && x === p_one_location.pointX) {
 							if (userName === player_one) {
-								addPointsToCanvas("point", mazeSize, context, canvas, "green", x, y);
+								addPointsToCanvas("point", mazeSize, context, canvas, COLOR.BGC.DARK, x, y);
 							}
 						}
 						if (y === p_two_location.pointY && x === p_two_location.pointX) {
 							if (userName === player_two) {
-								addPointsToCanvas("point", mazeSize, context, canvas, "green", x, y);
+								addPointsToCanvas("point", mazeSize, context, canvas, COLOR.BGC.DARK, x, y);
 							}
 						}
 					}

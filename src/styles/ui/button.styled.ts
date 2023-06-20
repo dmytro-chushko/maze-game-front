@@ -19,6 +19,7 @@ export const Button = styled.button`
 	:disabled {
 		color: ${FONT.COLOR.DISABLED};
 		cursor: auto;
+		border: ${COMMON.DISABLED_BORDER};
 	}
 
 	:hover:not(:disabled),

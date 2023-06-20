@@ -1,4 +1,6 @@
-export type maze = (boolean | "W")[][];
+import { MAZE_ELEMENT } from "utils/consts";
+
+export type maze = (boolean | MAZE_ELEMENT)[][];
 
 export interface IExit {
 	exitX: number;

@@ -7,17 +7,16 @@ import { getUserName } from "redux/reducers/user-name.reducer";
 import { GAME_EVENT, ROUTES } from "utils/consts";
 import { socket } from "web-socket/socket";
 import { excludeOwnGame } from "utils/exclude-own-game.hook";
+import { FONT } from "styles";
 
 import * as Styled from "./game-list.styled";
 import * as Ui from "styles/ui";
-import { FONT } from "styles";
 
 export const GameList = () => {
 	const { data, isLoading } = useGetAllPendingGamesQuery();
 	const [joinGame, { isLoading: isJoining }] = useJoinGameMutation();
 	const navigate = useNavigate();
 	const userName = useAppSelector(getUserName);
-	console.log(data);
 
 	const handleJoinGame = async (id: string) => {
 		const startedGame = await joinGame({ id, player_two: userName });
@@ -27,7 +26,7 @@ export const GameList = () => {
 		}
 	};
 
-	if (isLoading) {
+	if (isLoading || isJoining) {
 		return <Ui.Container.SubContent>...LOADING</Ui.Container.SubContent>;
 	}
 

@@ -30,12 +30,14 @@ export enum GAME_EVENT {
 	UPDATE_GAME_LIST = "update-game-list",
 	MOVE = "move",
 	GIVE_UP = "give-up",
+	LOST_CONNECTION = "lost-connection",
 }
 
 export enum CHAT_EVENT {
 	JOIN = "join",
 	LEAVE = "leave",
 	MESSAGE = "message",
+	LOST_CONNECTION = "lost-connection",
 }
 
 export enum MOVE {
@@ -43,4 +45,8 @@ export enum MOVE {
 	DOWN = "/down",
 	LEFT = "/left",
 	RIGHT = "/right",
+}
+
+export enum MAZE_ELEMENT {
+	WALL = "W",
 }

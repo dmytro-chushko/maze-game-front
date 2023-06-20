@@ -21,7 +21,6 @@ export const addPointsToCanvas = (
 			0,
 			Math.PI * 2,
 		);
-		context.fillStyle = "red";
 		context.fill();
 		context.closePath();
 	} else {

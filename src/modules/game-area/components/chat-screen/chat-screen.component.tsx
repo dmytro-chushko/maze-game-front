@@ -4,7 +4,7 @@ import { socket } from "web-socket/socket";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { addNewMessage, getMessages } from "redux/reducers/messages.reducer";
 import { getUserName } from "redux/reducers/user-name.reducer";
-import { IRecivedMessage } from "types/chat.types";
+import { IDisconnectMessage, IRecivedMessage } from "types/chat.types";
 import { getTime } from "utils/get-time";
 
 import * as Styled from "./chat-screen.styled";
@@ -18,7 +18,7 @@ export const ChatScreen = () => {
 	const messages = useAppSelector(getMessages);
 	const name = useAppSelector(getUserName);
 	const { id } = useParams();
-	const { refetch } = useGetGameByIdQuery(id || "");
+	const { data, refetch } = useGetGameByIdQuery(id || "");
 
 	useEffect(() => {
 		const handleSetMessage = (message: IRecivedMessage) => {
@@ -35,14 +35,26 @@ export const ChatScreen = () => {
 			refetch();
 		};
 
+		const handleLostConnection = ({ user }: IDisconnectMessage) => {
+			const timestamp = getTime();
+			dispatch(addNewMessage({ sender: "", message: `${user} has left the game!`, timestamp }));
+		};
+
+		if (data && data.winner) {
+			const timestamp = getTime();
+			dispatch(addNewMessage({ sender: "", message: `Player ${data.winner} has won!`, timestamp }));
+		}
+
 		socket.on(CHAT_EVENT.MESSAGE, handleSetMessage);
 		socket.on(GAME_EVENT.GIVE_UP, handleGiveUp);
+		socket.on(CHAT_EVENT.LOST_CONNECTION, handleLostConnection);
 
 		return () => {
 			socket.off(CHAT_EVENT.MESSAGE, handleSetMessage);
-			socket.on(GAME_EVENT.GIVE_UP, handleGiveUp);
+			socket.off(GAME_EVENT.GIVE_UP, handleGiveUp);
+			socket.off(CHAT_EVENT.LOST_CONNECTION, handleLostConnection);
 		};
-	}, []);
+	}, [data, dispatch, name, refetch]);
 
 	return (
 		<Styled.ScreenContainer>

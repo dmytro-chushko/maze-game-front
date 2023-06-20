@@ -9,7 +9,7 @@ import { socket } from "web-socket/socket";
 import { Socket } from "socket.io-client";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import { getUserName } from "redux/reducers/user-name.reducer";
-import { CHAT_EVENT, GAME_EVENT, MOVE } from "utils/consts";
+import { CHAT_EVENT, GAME_EVENT } from "utils/consts";
 import { addNewMessage } from "redux/reducers/messages.reducer";
 import { getTime } from "utils/get-time";
 
@@ -76,13 +76,13 @@ export const ChatInput = () => {
 
 	useEffect(() => {
 		socketRef.current = socket;
-		socket.emit(CHAT_EVENT.JOIN, { chatId: id });
+		socket.emit(CHAT_EVENT.JOIN, { chatId: id, user: sender });
 
 		return () => {
-			socket.emit(CHAT_EVENT.LEAVE, { chatId: id });
+			socket.emit(CHAT_EVENT.LEAVE, { chatId: id, user: sender });
 			socket.disconnect();
 		};
-	}, [id]);
+	}, [id, sender]);
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
