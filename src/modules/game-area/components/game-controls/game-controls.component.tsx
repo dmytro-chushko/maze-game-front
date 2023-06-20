@@ -5,7 +5,7 @@ import { useGetGameByIdQuery } from "redux/api/game.api";
 import { useAppDispatch } from "redux/hooks";
 import { removeAllMessages } from "redux/reducers/messages.reducer";
 import { ModalWindow } from "components/modal-window";
-import { ROUTES } from "utils/consts";
+import { GAME_STATUS, ROUTES } from "utils/consts";
 
 import * as Ui from "styles/ui";
 
@@ -28,14 +28,16 @@ export const GameControls = () => {
 	return (
 		<>
 			<Ui.Container.Wrapper mb="1rem">
-				<Ui.Button
-					type="button"
-					disabled={!!data?.winner}
-					aria-label="Give up button"
-					onClick={hamdleOpenModal}
-				>
-					give up
-				</Ui.Button>
+				{data && data.status === GAME_STATUS.STARTED && (
+					<Ui.Button
+						type="button"
+						disabled={!!data?.winner}
+						aria-label="Give up button"
+						onClick={hamdleOpenModal}
+					>
+						give up
+					</Ui.Button>
+				)}
 			</Ui.Container.Wrapper>
 			<Ui.Button
 				type="button"
