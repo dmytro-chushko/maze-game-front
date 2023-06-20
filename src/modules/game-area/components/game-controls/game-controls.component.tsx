@@ -1,22 +1,23 @@
 import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+
 import { useGetGameByIdQuery } from "redux/api/game.api";
-import { useAppDispatch, useAppSelector } from "redux/hooks";
+import { useAppDispatch } from "redux/hooks";
 import { removeAllMessages } from "redux/reducers/messages.reducer";
-import { getUserName } from "redux/reducers/user-name.reducer";
-import { GAME_EVENT, ROUTES } from "utils/consts";
-import { socket } from "web-socket/socket";
+import { ModalWindow } from "components/modal-window";
+import { ROUTES } from "utils/consts";
 
 import * as Ui from "styles/ui";
 
 export const GameControls = () => {
+	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const { id } = useParams();
 	const { data } = useGetGameByIdQuery(id || "");
 	const navigate = useNavigate();
-	const user = useAppSelector(getUserName);
 	const dispatch = useAppDispatch();
 
-	const handleGiveUp = () => {
-		socket.emit(GAME_EVENT.GIVE_UP, { id, user });
+	const hamdleOpenModal = () => {
+		setIsOpen(true);
 	};
 
 	const handleExitGame = () => {
@@ -31,7 +32,7 @@ export const GameControls = () => {
 					type="button"
 					disabled={!!data?.winner}
 					aria-label="Give up button"
-					onClick={handleGiveUp}
+					onClick={hamdleOpenModal}
 				>
 					give up
 				</Ui.Button>
@@ -44,6 +45,7 @@ export const GameControls = () => {
 			>
 				exit game
 			</Ui.Button>
+			<ModalWindow isOpen={isOpen} onClose={setIsOpen} />
 		</>
 	);
 };

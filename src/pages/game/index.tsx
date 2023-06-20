@@ -27,7 +27,9 @@ export const Game = () => {
 			<Ui.Container.Absolute center>
 				{isLoading && <div>...LOADING</div>}
 				{data && data.status === GAME_STATUS.PENDING && <WaitingScreen />}
-				{data && data.status === GAME_STATUS.STARTED && <GameArea />}
+				{data && (data.status === GAME_STATUS.STARTED || data.status === GAME_STATUS.FINISHED) && (
+					<GameArea />
+				)}
 			</Ui.Container.Absolute>
 		</Ui.Container.Main>
 	);
