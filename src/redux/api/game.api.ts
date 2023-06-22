@@ -26,14 +26,14 @@ export const gameApi = createApi({
 		}),
 		joinGame: builder.mutation<IGame, IJoinGame>({
 			query: ({ id, ...body }) => ({
-				url: id,
+				url: `/${id}`,
 				method: "PATCH",
 				body,
 			}),
 		}),
 		abortGame: builder.mutation<{ message: string }, string>({
 			query: id => ({
-				url: id,
+				url: `/${id}`,
 				method: "DELETE",
 			}),
 		}),
