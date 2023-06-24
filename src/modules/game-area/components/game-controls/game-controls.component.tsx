@@ -5,6 +5,7 @@ import { useGetGameByIdQuery } from "redux/api/game.api";
 import { useAppDispatch } from "redux/hooks";
 import { removeAllMessages } from "redux/reducers/messages.reducer";
 import { ModalWindow } from "components/modal-window";
+import { SurrenderConfirmation } from "components/modal-window/surrender-confirmation";
 import { GAME_STATUS, ROUTES } from "utils/consts";
 
 import * as Ui from "styles/ui";
@@ -47,7 +48,9 @@ export const GameControls = () => {
 			>
 				exit game
 			</Ui.Button>
-			<ModalWindow isOpen={isOpen} onClose={setIsOpen} />
+			<ModalWindow isOpen={isOpen} onClose={setIsOpen}>
+				<SurrenderConfirmation onClose={setIsOpen} />
+			</ModalWindow>
 		</>
 	);
 };

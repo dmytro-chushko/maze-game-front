@@ -19,7 +19,7 @@ export const NewGameButton = () => {
 		const createdGame = await createGame({ player_one });
 		if ("data" in createdGame) {
 			socket.emit(GAME_EVENT.CREATE_GAME);
-			navigate(`${ROUTES.GAME}/${createdGame.data._id}`);
+			navigate(`${ROUTES.GAME}/${createdGame.data._id}`, { replace: true });
 		}
 	};
 

@@ -22,7 +22,7 @@ export const GameList = () => {
 		const startedGame = await joinGame({ id, player_two: userName });
 		if ("data" in startedGame) {
 			socket.emit(GAME_EVENT.JOIN_GAME);
-			navigate(`${ROUTES.GAME}/${startedGame.data._id}`);
+			navigate(`${ROUTES.GAME}/${startedGame.data._id}`, { replace: true });
 		}
 	};
 
