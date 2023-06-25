@@ -52,3 +52,9 @@ export enum MAZE_ELEMENT {
 	EXIT = "E",
 	POINT = "point",
 }
+
+export enum TIMER {
+	STEP = 1000,
+	FULL_TIME = 360,
+	SECONDS_IN_MINUTE = 60,
+}
