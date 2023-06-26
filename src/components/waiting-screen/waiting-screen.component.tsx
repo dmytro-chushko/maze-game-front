@@ -10,6 +10,7 @@ import { AbortingGameConfirmation } from "components/modal-window/aborting-game-
 
 import { FONT } from "styles";
 import * as Ui from "styles/ui";
+import * as Styled from "./waiting-screen.styled";
 
 export const WaitingScreen = () => {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -48,9 +49,9 @@ export const WaitingScreen = () => {
 					You started a new game {<Timer />} ago. Waiting for a second player…
 				</Ui.Paragraph>
 			</Ui.Container.Wrapper>
-			<Ui.Button type="button" onClick={handleInvokeModalWindow} disabled={isLoading}>
+			<Styled.AbortButton type="button" onClick={handleInvokeModalWindow} disabled={isLoading}>
 				{isLoading ? "...loading" : "abort game"}
-			</Ui.Button>
+			</Styled.AbortButton>
 			<ModalWindow isOpen={isOpen} onClose={setIsOpen}>
 				<AbortingGameConfirmation onClose={setIsOpen} handleAbortingGameClick={handleAbortGame} />
 			</ModalWindow>
