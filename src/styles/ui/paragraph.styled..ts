@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 
-import { FONT } from "styles";
+import { COMMON, FONT } from "styles";
 
 interface IParagraph {
 	ta?: FONT.TEXT_ALIGN;
@@ -30,4 +30,12 @@ export const Paragraph = styled.p<IParagraph>`
 		css`
 			color: ${color};
 		`};
+`;
+
+export const TitleTeg = styled.h1`
+	font-size: 4em;
+	font-weight: ${FONT.WEIGHT.BOLD};
+	text-shadow: ${COMMON.TEXT_SHADOW};
+
+	color: ${FONT.COLOR.ACCENT};
 `;

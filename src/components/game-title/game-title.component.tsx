@@ -1,9 +1,9 @@
 import * as Ui from "styles/ui";
 
-export const PageNotFound = () => {
+export const GameTitle = () => {
 	return (
 		<Ui.Container.Title>
-			<Ui.TitleTeg>Page not found</Ui.TitleTeg>
+			<Ui.TitleTeg>The Rat Race</Ui.TitleTeg>
 		</Ui.Container.Title>
 	);
 };

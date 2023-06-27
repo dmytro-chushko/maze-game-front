@@ -54,3 +54,13 @@ export const SubContent = styled.div`
 	border: ${COMMON.BORDER};
 	border-radius: ${COMMON.BORDER_RADIUS};
 `;
+
+export const Title = styled(Absolute)`
+	top: 10%;
+	left: 50%;
+
+	transform: translateX(-50%);
+`;
+
+
+
