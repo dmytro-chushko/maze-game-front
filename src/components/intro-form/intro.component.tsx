@@ -10,6 +10,7 @@ import { setUserName } from "redux/reducers/user-name.reducer";
 import * as Styled from "./intro.styled";
 import * as Ui from "styles/ui";
 import { FONT } from "styles";
+import { GameTitle } from "components/game-title";
 
 export const IntroForm = () => {
 	const dispatch = useAppDispatch();
@@ -30,6 +31,7 @@ export const IntroForm = () => {
 
 	return (
 		<Ui.Container.Main>
+			<GameTitle />
 			<Ui.Container.Absolute center>
 				<Ui.Container.Content>
 					<form onSubmit={handleSubmit(onSubmit)}>
